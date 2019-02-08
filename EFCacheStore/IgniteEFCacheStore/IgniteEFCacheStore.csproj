@@ -34,30 +34,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Apache.Ignite.Core, Version=1.7.0.13146, Culture=neutral, PublicKeyToken=a487a7ff0b2aaa4a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Apache.Ignite.1.7.0\lib\net40\Apache.Ignite.Core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Apache.Ignite, Version=2.7.0.33575, Culture=neutral, PublicKeyToken=6e15f083b9518446, processorArchitecture=MSIL">
+      <HintPath>..\packages\Apache.Ignite.2.7.0\lib\net40\Apache.Ignite.exe</HintPath>
+    </Reference>
+    <Reference Include="Apache.Ignite.Core, Version=2.7.0.33575, Culture=neutral, PublicKeyToken=a487a7ff0b2aaa4a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Apache.Ignite.2.7.0\lib\net40\Apache.Ignite.Core.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServerCompact, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.SqlServerCompact.6.1.3\lib\net45\EntityFramework.SqlServerCompact.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.SqlServerCompact.6.2.0\lib\net45\EntityFramework.SqlServerCompact.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityFrameworkCacheStore.cs" />
@@ -73,16 +71,22 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="config\default-config.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
+if not exist "$(TargetDir)Libs" md "$(TargetDir)Libs"
+xcopy /s /y "$(SolutionDir)packages\Apache.Ignite.1.7.0\Libs\*.*" "$(TargetDir)Libs"
     if not exist "$(TargetDir)x86" md "$(TargetDir)x86"
     xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\x86\*.*" "$(TargetDir)x86"
     if not exist "$(TargetDir)amd64" md "$(TargetDir)amd64"
     xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\amd64\*.*" "$(TargetDir)amd64"
-if not exist "$(TargetDir)Libs" md "$(TargetDir)Libs"
-xcopy /s /y "$(SolutionDir)packages\Apache.Ignite.1.7.0\Libs\*.*" "$(TargetDir)Libs"</PostBuildEvent>
+if not exist "$(TargetDir)libs" md "$(TargetDir)libs"
+xcopy /s /y "$(SolutionDir)packages\Apache.Ignite.2.7.0\libs\*.*" "$(TargetDir)libs"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
